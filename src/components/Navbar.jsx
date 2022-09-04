@@ -30,7 +30,7 @@ const SearchCantainer = styled.div`
   padding: 5px;
 `;
 const Input = styled.input`
-  border: none;
+border:0;
 `;
 
 const Center = styled.div`
