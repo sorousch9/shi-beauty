@@ -30,8 +30,8 @@ flex-direction: column;
 const Title = styled.h1`
 color: white;
 margin-bottom:20px;
-text-shadow: 3px 3px 4px #666;
-background-color: rgba(65, 65, 65, 0.280);
+text-shadow: 3px 3px 9px #366;
+;
 padding: 5px 10px;
 border-radius: 5px;
 
