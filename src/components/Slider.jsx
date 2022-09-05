@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
-
+import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
 import { useState } from "react";
 import { sliderItems } from "../Data";
 
@@ -89,7 +88,7 @@ export const Slider = () => {
   return (
     <Container>
       <Arrow direction="left" onClick={() => handleClick("left")}>
-        <ArrowBackIos />
+        <ArrowBackIosNew />
       </Arrow>
       <Wrapper slideIndex={slideIndex}>
         {sliderItems.map((item) => (

@@ -26,5 +26,27 @@ export const sliderItems = [
    
     },
   ];
+  export const categories = [
+    {
+      id: 1,
+      img: "https://images.pexels.com/photos/972937/pexels-photo-972937.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      title: "Charmeuse skirt!",
+    },
+    {
+      id: 2,
+      img: "https://images.pexels.com/photos/1375736/pexels-photo-1375736.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      title: "Cardigan STYLE!",
+      
+    },
+    {
+      id: 3,
+      img: "https://images.pexels.com/photos/859195/pexels-photo-859195.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      title: "Galloon",
+    },
+    {
+      id: 4,
+      img: "https://images.pexels.com/photos/818992/pexels-photo-818992.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      title: "Houndstooth jacket",
+    },
+  ];
 
- 

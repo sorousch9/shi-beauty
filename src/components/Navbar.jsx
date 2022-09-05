@@ -17,11 +17,15 @@ const Left = styled.div`
   align-items: center;
 `;
 
-const LeftLanguages = styled.span`
-padding : 10px; 20px;
+const LeftLanguages = styled.select`
+border: 0.5px solid lightgray;
+padding : 5px; 20px;
 font-size: 14px;
   cursor: pointer;
 `;
+const LeftLanguagesDE = styled.option``;
+const LeftLanguagesEN = styled.option``;
+
 const SearchCantainer = styled.div`
   border: 0.5px solid lightgray;
   display: flex;
@@ -30,7 +34,7 @@ const SearchCantainer = styled.div`
   padding: 5px;
 `;
 const Input = styled.input`
-border:0;
+  border: 0;
 `;
 
 const Center = styled.div`
@@ -59,10 +63,13 @@ export const Navbar = () => {
     <Container>
       <Wrapper>
         <Left>
-          <LeftLanguages>DE</LeftLanguages>
+          <LeftLanguages>
+            <LeftLanguagesDE value="DE">DE</LeftLanguagesDE>
+            <LeftLanguagesEN value="EN">EN</LeftLanguagesEN>
+          </LeftLanguages>
           <SearchCantainer>
-            <Input />
-            <Search style={{color: 'gray' , fontSize:16}} />
+            <Input placeholder="Suchen" />
+            <Search style={{ color: "gray", fontSize: 16 }} />
           </SearchCantainer>
         </Left>
         <Center>
@@ -70,7 +77,7 @@ export const Navbar = () => {
         </Center>
         <Right>
           <MenuItem />
-          Logging
+          Registrieren
           <MenuItem />
           Anmelden
           <MenuItem>
