@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Badge } from "@mui/material";
 import { Search, ShoppingCartOutlined } from "@mui/icons-material";
+import Logo1 from "../assets/LOGO.webp"
 
 const Container = styled.div`
   height: 70px;
@@ -31,18 +32,19 @@ const SearchCantainer = styled.div`
   display: flex;
   align-items: center;
   margin-left: 25px;
-  padding: 5px;
+
 `;
 const Input = styled.input`
-  border: 0;
+  border: none;
+  padding: 5px;
 `;
 
 const Center = styled.div`
   flex: 2;
   text-align: center;
 `;
-const Logo = styled.h1`
-  font-weight: bold;
+const Logo = styled.img`
+  width:180px;
 `;
 
 const Right = styled.div`
@@ -73,7 +75,7 @@ export const Navbar = () => {
           </SearchCantainer>
         </Left>
         <Center>
-          <Logo>Shi Beauty.</Logo>
+          <Logo src={Logo1}></Logo>
         </Center>
         <Right>
           <MenuItem />

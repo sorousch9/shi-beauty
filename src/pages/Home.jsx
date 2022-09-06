@@ -1,5 +1,6 @@
 import React from "react";
 import { Anons } from "../components/Anons";
+import { AttractiveMenu } from "../components/AttractiveMenu";
 import { Categories } from "../components/Categories";
 import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
@@ -13,6 +14,7 @@ export const Home = () => {
       <Anons />
       <Navbar />
       <Slider />
+      <AttractiveMenu />
       <Categories />
       <Products />
       <Newsletter />

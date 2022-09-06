@@ -14,22 +14,22 @@ export const sliderItems = [
   {
     id: 1,
     img: slide1,
-    title: "SUMMER SALE",
-    desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+    title: "Ein Herz für Mode",
+    desc: "Endecke aufregende und hochwertige Fashion-Schätze in unserer Pre-owned Kollektion",
     backColor:"radial-gradient(circle, rgba(184,238,174,1) 0%, rgba(255,255,255,1) 100%)"
   },
   {
     id: 2,
     img: slide2,
-    title: "AUTUMN COLLECTION",
-    desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+    title: "Die Klassiker der Herbstsaison",
+    desc: "GEHEN SIE KEINE KOMPROMISSE BEIM STIL! ERHALTEN SIE 30 % RABATT FÜR NEUE ANKÜNFTE.",
     backColor:"radial-gradient(circle, rgba(174,175,238,1) 0%, rgba(255,255,255,1) 100%)"
   },
   {
     id: 3,
     img: slide3,
-    title: "LOUNGEWEAR LOVE",
-    desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+    title: "Style Report",
+    desc: "Lass dich für die neue Saison inspirieren und frische deinen Look mit aktuellen Must-haves auf.",
     backColor:"radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(255,255,255,1) 100%)"
   },
 ];
