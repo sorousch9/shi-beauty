@@ -65,7 +65,7 @@ const Icon = styled.div`
   cursor: pointer;
   &:hover {
    font-size: 18px;
-   font-weight:800;
+   font-weight:800;}
 `;
 
 const ShopZertifiedIcon = styled.img`
