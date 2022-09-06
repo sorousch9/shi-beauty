@@ -1,6 +1,6 @@
-import slide1 from "./assets/filling_August_52.jpg";
-import slide2 from "./assets/FS22_neu.jpg";
-import slide3 from "./assets/Gendersplit.webp";
+import slide1 from "./assets/Gendersplit.webp";
+import slide2 from "./assets/FS22_neu.webp";
+import slide3 from "./assets/filling_August_52.webp";
 import cat1 from "./assets/shi Beauty (1).webp";
 import cat2 from "./assets/shi Beauty (2).webp";
 import cat3 from "./assets/shi Beauty (3).webp";
@@ -16,18 +16,21 @@ export const sliderItems = [
     img: slide1,
     title: "SUMMER SALE",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+    backColor:"radial-gradient(circle, rgba(184,238,174,1) 0%, rgba(255,255,255,1) 100%)"
   },
   {
     id: 2,
     img: slide2,
     title: "AUTUMN COLLECTION",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+    backColor:"radial-gradient(circle, rgba(174,175,238,1) 0%, rgba(255,255,255,1) 100%)"
   },
   {
     id: 3,
     img: slide3,
     title: "LOUNGEWEAR LOVE",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+    backColor:"radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(255,255,255,1) 100%)"
   },
 ];
 export const categories = [

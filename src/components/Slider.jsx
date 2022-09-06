@@ -40,6 +40,7 @@ const Sliders = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background: ${(props) => props.backColor};
 `;
 
 const Image = styled.img`
@@ -92,8 +93,8 @@ export const Slider = () => {
       </Arrow>
       <Wrapper slideIndex={slideIndex}>
         {sliderItems.map((item) => (
-          <Sliders  key={item.id}>
-            <Image src={item.img}/>
+          <Sliders backColor={item.backColor} key={item.id}>
+            <Image src={item.img} />
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
