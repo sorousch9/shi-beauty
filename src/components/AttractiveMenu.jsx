@@ -10,10 +10,13 @@ const Container = styled.div`
   height: 15vh;
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
+
 `;
 const Section = styled.div`
   display: flex;
-  margin: 10px;
+ 
+  margin: auto;
   background: linear-gradient(
     60deg,
     #f79533,
@@ -23,7 +26,7 @@ const Section = styled.div`
     #5073b8
   );
   position: relative;
-  padding: 3px 4px 3px 4px;
+  padding: 5px 5px 5px 5px;
   border-radius: 7px;
   align-items: center;
   justify-content: space-around;
