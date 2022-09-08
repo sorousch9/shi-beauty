@@ -13,6 +13,7 @@ import {
   Twitter,
   YouTube,
 } from "@mui/icons-material";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   display: flex;
@@ -20,14 +21,15 @@ const Container = styled.div`
 `;
 const Top = styled.div`
   display: flex;
-
+  ${mobile({ flexWrap: "wrap" })}
 `;
 
 const Left = styled.div`
   flex: 33%;
   display: flex;
   flex-direction: column;
-  margin-left:15%;
+  margin-left: 15%;
+  ${mobile({ marginLeft: "1%", alignItems: "center" })}
 `;
 const Title = styled.h2`
   margin-top: 20px;
@@ -46,7 +48,7 @@ const TelNumber = styled.span`
 const Link = styled.a`
   margin-top: 10px;
   text-decoration: none;
-  color: #090909 ;
+  color: #090909;
 `;
 
 const AppLink = styled.div`
@@ -65,6 +67,7 @@ const Center = styled.div`
   flex: 33%;
   display: flex;
   flex-direction: column;
+  ${mobile({ margin: " 0px 20px" })}
 `;
 const Image = styled.img`
   width: 120px;
@@ -85,18 +88,21 @@ const Bottom = styled.div`
 `;
 
 const SocialIconContainer = styled.div`
-display: flex;
-height: 15vh;
-border: 10px solid;
-width: 80%;
-margin-top: 30px;
-border-color: antiquewhite white white white;
-justify-content: center;
-align-items: center;`;
+  display: flex;
+  height: 15vh;
+  border: 10px solid;
+  width: 80%;
+  margin-top: 30px;
+  border-color: antiquewhite white white white;
+  justify-content: center;
+  align-items: center;
+`;
 
 const SocialIcon = styled.div`
-margin-right: 15px;
-&:hover{font-size:100px}
+  margin-right: 15px;
+  &:hover {
+    font-size: 100px;
+  }
 `;
 
 const DecsContainer = styled.div`
@@ -108,16 +114,16 @@ const DecsContainer = styled.div`
   border-color: antiquewhite white white white;
   justify-content: space-around;
   align-items: center;
+  ${mobile({ flexWrap: "wrap" })}
 `;
 const Icon = styled.div`
-
   align-items: center;
   display: flex;
   cursor: pointer;
   &:hover {
-   font-size: 18px;
-   font-weight:800}
-   
+    font-size: 18px;
+    font-weight: 800;
+  }
 `;
 
 const Text = styled.span`
@@ -125,11 +131,11 @@ const Text = styled.span`
   font-weight: 500;
 `;
 const WebsiteDescription = styled.span`
-display: flex;
-justify-content: center;
-align-items: center;
-font-size:16px;`
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+`;
 
 export const Footer = () => {
   return (
@@ -193,23 +199,25 @@ export const Footer = () => {
         </DecsContainer>
         <SocialIconContainer>
           <SocialIcon>
-            <Facebook style={{fontSize:35}} />
+            <Facebook style={{ fontSize: 35 }} />
           </SocialIcon>
           <SocialIcon>
-            <Instagram style={{fontSize:35}} />
+            <Instagram style={{ fontSize: 35 }} />
           </SocialIcon>
           <SocialIcon>
-            <Twitter style={{fontSize:35}} />
+            <Twitter style={{ fontSize: 35 }} />
           </SocialIcon>
           <SocialIcon>
-            <LinkedIn style={{fontSize:35}} />
+            <LinkedIn style={{ fontSize: 35 }} />
           </SocialIcon>
           <SocialIcon>
-            <YouTube style={{fontSize:35}} />
+            <YouTube style={{ fontSize: 35 }} />
           </SocialIcon>
         </SocialIconContainer>
       </Bottom>
-      <WebsiteDescription>Design by Soroush Safarkhah "Sep 2022"</WebsiteDescription>
+      <WebsiteDescription>
+        Design by Soroush Safarkhah "Sep 2022"
+      </WebsiteDescription>
     </Container>
   );
 };

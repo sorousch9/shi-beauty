@@ -100,8 +100,8 @@ export const Navbar = () => {
             Warenkorb
           </MenuItem>
           <MenuItem>
-            <PersonPinOutlined style={{ color: "gray" }} />
-            Mein Konto
+            <PersonPinOutlined style={{ color: "gray" }}  />
+           <a href="#Login">Mein Konto</a> 
           </MenuItem>
         </Right>
       </Wrapper>
