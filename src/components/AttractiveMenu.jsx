@@ -5,17 +5,16 @@ import {
   LocalShippingOutlined,
 } from "@mui/icons-material";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
-  height: 15vh;
+  margin-top: 10px;
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
-
+  ${mobile({ marginTop: "60px" })}
 `;
 const Section = styled.div`
   display: flex;
- 
   margin: auto;
   background: linear-gradient(
     60deg,
@@ -30,21 +29,25 @@ const Section = styled.div`
   border-radius: 7px;
   align-items: center;
   justify-content: space-around;
+  ${mobile({ display: "none"})}
 `;
 
 const SContainer = styled.div`
 display:flex;
+width:230px;
 align-items: center;
 padding:18px 10px;
 background: #fff;
 color: black;
 border-radius: 5px;
 font-size: 1rem;
+
 }`;
 const Topic = styled.div`
-margin-left: 5px;
-font-size: 1.1rem;
-font-weight: 500;`;
+  margin-left: 5px;
+  font-size: 1.1rem;
+  font-weight: 500;
+`;
 
 export const AttractiveMenu = () => {
   return (

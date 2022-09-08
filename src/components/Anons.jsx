@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   height: 24px;
@@ -10,7 +11,9 @@ const Container = styled.div`
   text-align: center;
   font-size: 14px;
   font-weight: 500;
+  ${mobile({display:"none"})};
 `;
+
 const Span = styled.span`padding-left: 50px;`;
 
 export const Anons = () => {

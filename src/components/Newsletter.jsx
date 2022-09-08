@@ -5,6 +5,7 @@ import {
   ForumOutlined,
 } from "@mui/icons-material";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   height: 60vh;
@@ -17,6 +18,7 @@ const Container = styled.div`
 const Title = styled.h1`
   font-size: 45px;
   margin-bottom: 30px;
+  ${mobile({ fontSize: "34px" ,textAlign: "center" })}
 `;
 
 const Description = styled.div`
@@ -25,6 +27,7 @@ const Description = styled.div`
   margin-bottom: 20px;
   font-weight: 300;
   text-align: center;
+  
 `;
 
 const InputContainer = styled.div`
@@ -34,6 +37,7 @@ const InputContainer = styled.div`
   justify-content: space-between;
   background-color: #fff;
   border: 1px solid lightgray;
+  ${mobile({ width: "80%" })}
 `;
 
 const Input = styled.input`
@@ -57,6 +61,7 @@ const DecsContainer = styled.div`
   border-color: white antiquewhite white antiquewhite;
   justify-content: space-around;
   align-items: center;
+  ${mobile({ flexDirection:"column", justifyContent: "start",height:"auto"})}
 
 `;
 const Icon = styled.div`

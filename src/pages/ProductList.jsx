@@ -4,11 +4,15 @@ import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
 import { Newsletter } from "../components/Newsletter";
 import { Products } from "../components/Products";
+import { mobile } from "../responsive";
 
-const Container = styled.div``;
+const Container = styled.div`
+`
 
 const Title = styled.h1`
   margin: 20;
+  text-align: center;
+  ${mobile({ marginTop: "50px"})}
 `;
 
 const FilterContainer = styled.div`
@@ -17,22 +21,26 @@ const FilterContainer = styled.div`
   justify-content: space-around;
   background-color: #faaca8;
   background-image: linear-gradient(19deg, #faaca8 0%, #ddd6f3 100%);
+  ${mobile({ flexDirection: "column"})}
 `;
 
 const Filter = styled.div`
   display: flex;
   align-items: center;
   margin: 20px;
+  ${mobile({ width: "0px 20px", display: "flex", flexDirection: "column" })}
 `;
 const FilterText = styled.span`
   font-size: 18px;
   font-weight: 400;
   margin-right: 20px;
+  ${mobile({ marginRight: "0px" })}
 `;
 const Select = styled.select`
   width: 180px;
   height: 30px;
   margin-right: 20px;
+  ${mobile({ margin: "3px" ,width: "200px" })}
 `;
 const Option = styled.option``;
 

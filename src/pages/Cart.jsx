@@ -6,13 +6,14 @@ import PImage1 from "../assets/P1.jpg";
 import PImage2 from "../assets/P2.jpg";
 import Icons from "../assets/singleV3.png";
 import { Add, Remove } from "@mui/icons-material";
+import { mobile } from "../responsive";
 
-const Container = styled.div`
-`;
+const Container = styled.div``;
 
 const Wrapper = styled.div`
   padding: 20px;
   margin-bottom: 20px;
+  ${mobile({ marginTop: "20px" })};
 `;
 
 const Title = styled.h1`
@@ -24,6 +25,7 @@ const Top = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  ${mobile({ flexDirection: "column" })};
 `;
 const TopButton = styled.button`
   padding: 2px;
@@ -57,6 +59,7 @@ const TopButton = styled.button`
   box-shadow: none;
   cursor: pointer;
   margin-bottom: 10px;
+  ${mobile({ display: "none" })};
 `;
 const ButtenText = styled.span`
   display: block;
@@ -67,7 +70,9 @@ const ButtenText = styled.span`
   border-radius: 15px;
 `;
 
-const TopTexts = styled.div``;
+const TopTexts = styled.div`
+  ${mobile({ display: "none" })};
+`;
 const TopText = styled.span`
   cursor: pointer;
   margin: 0px 10px;
@@ -76,6 +81,7 @@ const TopText = styled.span`
 const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const Info = styled.div`
@@ -84,6 +90,7 @@ const Info = styled.div`
 const Product = styled.div`
   display: flex;
   justify-content: space-between;
+  ${mobile({ flexDirection: "column" })}
 `;
 const ProductDetail = styled.div`
   flex: 2;
@@ -91,6 +98,7 @@ const ProductDetail = styled.div`
 `;
 const Image = styled.img`
   width: 110px;
+  ${mobile({ margin: "10px" })}
 `;
 const Details = styled.div`
   padding: 20px;
@@ -127,15 +135,23 @@ const ProductAmountContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  border:1px solid #ececec;
+  border-radius 5px;
+  background-color: #ececec;
+  padding: 0px 10px;
+  cursor: pointer;
+  ${mobile({ margin: "10px" })}
 `;
 const ProductAmount = styled.div`
   font-size: 20px;
   margin: 5px;
+  ${mobile({ margin: "5px 15px" })}
 `;
 
 const ProductPrice = styled.div`
   font-size: 25px;
   font-weight: 200;
+  ${mobile({ marginBottom: "20px" })}
 `;
 const Gap = styled.hr`
   background-color: #bebebe;
@@ -201,11 +217,12 @@ const SummaryButtonText = styled.span`
 
 const UnderBottom = styled.div``;
 const IconsContainerTitle = styled.h3`
-margin-bottom: 10px;`;
+  margin-bottom: 10px;
+`;
 const IconsContainer = styled.img`
-width: 100%;
-margin-bottom: 10px;`;
-
+  width: 100%;
+  margin-bottom: 10px;
+`;
 
 export const Cart = () => {
   return (

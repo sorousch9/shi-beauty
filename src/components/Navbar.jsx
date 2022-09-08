@@ -8,6 +8,7 @@ import {
   SmsFailedOutlined,
 } from "@mui/icons-material";
 import Logo1 from "../assets/LOGO.png";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   height: 70px;
@@ -16,12 +17,15 @@ const Wrapper = styled.div`
 display: flex;
 justify-content: space-between;
 align-items: center;
-padding : 10px; 20px`;
-
+padding : 10px; 20px;
+${mobile({ flexWrap: "wrap", padding: "3px 3px" })};
+`;
 const Center = styled.div`
   display: flex;
   flex: 45%;
-  align-items: center;`;
+  align-items: center;
+  ${mobile({ flex: "0", marginTop: "10px" })};
+`;
 
 const SearchCantainer = styled.div`
   display: flex;
@@ -41,6 +45,7 @@ const Input = styled.input`
 const Left = styled.div`
   flex: 15%;
   text-align: center;
+  ${mobile({ flex: "0" })};
 `;
 const Logo = styled.img`
   width: 100px;
@@ -51,6 +56,7 @@ const Right = styled.div`
   flex: 40%;
   align-items: center;
   justify-content: flex-end;
+  ${mobile({ marginTop: "13px", justifyContent: "space-between" })};
 `;
 const MenuItem = styled.div`
   display: flex;
@@ -80,10 +86,7 @@ export const Navbar = () => {
             <SmsFailedOutlined style={{ color: "gray" }} />
             Service
           </MenuItem>
-          <MenuItem>
-            <PersonPinOutlined style={{ color: "gray" }} />
-            Mein Konto
-          </MenuItem>
+
           <MenuItem>
             <Badge badgeContent={1} color="primary" style={{ color: "gray" }}>
               <FavoriteBorderOutlined />
@@ -95,6 +98,10 @@ export const Navbar = () => {
               <ShoppingCartOutlined />
             </Badge>
             Warenkorb
+          </MenuItem>
+          <MenuItem>
+            <PersonPinOutlined style={{ color: "gray" }} />
+            Mein Konto
           </MenuItem>
         </Right>
       </Wrapper>
