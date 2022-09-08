@@ -7,10 +7,12 @@ import PImage2 from "../assets/P2.jpg";
 import Icons from "../assets/singleV3.png";
 import { Add, Remove } from "@mui/icons-material";
 
-const Container = styled.div``;
+const Container = styled.div`
+`;
 
 const Wrapper = styled.div`
   padding: 20px;
+  margin-bottom: 20px;
 `;
 
 const Title = styled.h1`
@@ -203,7 +205,7 @@ margin-bottom: 10px;`;
 const IconsContainer = styled.img`
 width: 100%;
 margin-bottom: 10px;`;
-const IconsContainerText = styled.span``;
+
 
 export const Cart = () => {
   return (
@@ -302,9 +304,6 @@ export const Cart = () => {
             <UnderBottom>
               <IconsContainerTitle>WIR AKZEPTIEREN:</IconsContainerTitle>
               <IconsContainer src={Icons} />
-              <IconsContainerText>
-                Du hast einen Rabattcode? Füge ihn im nächsten Schritt hinzu.
-              </IconsContainerText>
             </UnderBottom>
           </Summary>
         </Bottom>

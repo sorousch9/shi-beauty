@@ -20,17 +20,19 @@ const Container = styled.div`
 `;
 const Top = styled.div`
   display: flex;
-  margin-left: 20vw;
+
 `;
 
 const Left = styled.div`
-  flex: 1;
+  flex: 33%;
   display: flex;
   flex-direction: column;
+  margin-left:15%;
 `;
 const Title = styled.h2`
   margin-top: 20px;
   font-size: 1.6rem;
+  font-weight: 500;
 `;
 const Desc = styled.span`
   margin-top: 20px;
@@ -60,7 +62,7 @@ const AppImage = styled.img`
 `;
 
 const Center = styled.div`
-  flex: 1;
+  flex: 33%;
   display: flex;
   flex-direction: column;
 `;
@@ -70,7 +72,7 @@ const Image = styled.img`
   margin-top: 10px;
 `;
 const Right = styled.div`
-  flex: 1;
+  flex: 33%;
   display: flex;
   flex-direction: column;
 `;
