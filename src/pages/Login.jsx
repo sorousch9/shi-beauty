@@ -1,26 +1,35 @@
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { useNavigate } from "react-router-dom";
+import {SmallNavi} from "../components/SmallNav"
+
+
 
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("https://images.pexels.com/photos/3609576/pexels-photo-3609576.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+    url("https://images.pexels.com/photos/1271972/pexels-photo-1271972.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
       center;
   background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column-reverse;
+
 `;
 
 const Wrapper = styled.div`
+
   width: 25%;
   padding: 20px;
   background-color: white;
+  margin-left : 20px;
   ${mobile({ width: "75%" })}
 `;
 
 const Title = styled.h1`
+
   font-size: 24px;
   font-weight: 300;
 `;
@@ -47,7 +56,7 @@ const Button = styled.button`
   margin-bottom: 10px;
 `;
 
-const Link = styled.a`
+const LinkLogin = styled.a`
   margin: 5px 0px;
   font-size: 12px;
   text-decoration: underline;
@@ -55,16 +64,20 @@ const Link = styled.a`
 `;
 
 export const Login = () => {
+  const navigate = useNavigate()
   return (
     <Container>
+      <SmallNavi/>
       <Wrapper>
         <Title>Anmelden</Title>
         <Form>
           <Input placeholder="Deine E-Mail-Adresse" />
           <Input placeholder="Dein Passwort" />
-          <Button>Anmelden</Button>
-          <Link>Passwort vergessen ?/ Probleme bei der Anmeldung ?</Link>
-          <Link>Neu beu Shi ? Jetzt registrieren</Link>
+            <Button onClick={() =>navigate("/")}>Anmelden</Button>
+          <LinkLogin onClick={() =>navigate("/")}>
+            Passwort vergessen ?/ Probleme bei der Anmeldung ?
+          </LinkLogin >
+          <LinkLogin onClick={() =>navigate("/")}>Neu beu Shi ? Jetzt registrieren</LinkLogin>
         </Form>
       </Wrapper>
     </Container>

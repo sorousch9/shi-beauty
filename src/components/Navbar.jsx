@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Badge } from "@mui/material";
 import {
+  AppRegistration,
   FavoriteBorderOutlined,
   PersonPinOutlined,
   Search,
@@ -9,6 +10,8 @@ import {
 } from "@mui/icons-material";
 import Logo1 from "../assets/LOGO.png";
 import { mobile } from "../responsive";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   height: 70px;
@@ -49,6 +52,7 @@ const Left = styled.div`
 `;
 const Logo = styled.img`
   width: 100px;
+  cursor: pointer;
 `;
 
 const Right = styled.div`
@@ -66,14 +70,16 @@ const MenuItem = styled.div`
   cursor: pointer;
   margin: 0px 3px;
   color: gray;
+  ${mobile({ fontSize: "12px" })};
 `;
 
 export const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <Container>
       <Wrapper>
         <Left>
-          <Logo src={Logo1}></Logo>
+          <Logo src={Logo1} onClick={() => navigate("/")}></Logo>
         </Left>
         <Center>
           <SearchCantainer>
@@ -83,25 +89,59 @@ export const Navbar = () => {
         </Center>
         <Right>
           <MenuItem>
-            <SmsFailedOutlined style={{ color: "gray" }} />
-            Service
+            <SmsFailedOutlined
+              style={{ color: "gray" }}
+              onClick={() => navigate("/")}
+            />
+            <Link
+              to="/redirect"
+              style={{ color: "gray", textDecoration: "none" }}
+            >
+              Service
+            </Link>
           </MenuItem>
 
           <MenuItem>
             <Badge badgeContent={1} color="primary" style={{ color: "gray" }}>
-              <FavoriteBorderOutlined />
+              <FavoriteBorderOutlined onClick={() => navigate("/")} />
             </Badge>
-            Merkzettel
+            <Link
+              to="/redirect"
+              style={{ color: "gray", textDecoration: "none" }}
+            >
+              Merkzettel
+            </Link>
           </MenuItem>
+
           <MenuItem>
             <Badge badgeContent={3} color="primary" style={{ color: "gray" }}>
-              <ShoppingCartOutlined />
+              <ShoppingCartOutlined onClick={() => navigate("/cart")} />
             </Badge>
-            Warenkorb
+            <Link to="/cart" style={{ color: "gray", textDecoration: "none" }}>
+              Warenkorb
+            </Link>
+          </MenuItem>
+
+          <MenuItem>
+            <PersonPinOutlined
+              style={{ color: "gray" }}
+              onClick={() => navigate("/login")}
+            />
+            <Link to="/login" style={{ color: "gray", textDecoration: "none" }}>
+              Mein Konto
+            </Link>
           </MenuItem>
           <MenuItem>
-            <PersonPinOutlined style={{ color: "gray" }}  />
-           <a href="#Login">Mein Konto</a> 
+            <AppRegistration
+              style={{ color: "gray" }}
+              onClick={() => navigate("/register")}
+            />
+            <Link
+              to="/register"
+              style={{ color: "gray", textDecoration: "none" }}
+            >
+              Registrieren
+            </Link>
           </MenuItem>
         </Right>
       </Wrapper>

@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { useNavigate } from "react-router-dom";
+
 
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("https://images.pexels.com/photos/1154861/pexels-photo-1154861.jpeg")
+    url("https://images.pexels.com/photos/994234/pexels-photo-994234.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
       center;
   background-size: cover;
   display: flex;
@@ -43,7 +45,6 @@ const Agreement = styled.span`
 `;
 
 const Button = styled.button`
-  width: 40%;
   border: none;
   padding: 15px 20px;
   background-color: teal;
@@ -52,6 +53,7 @@ const Button = styled.button`
 `;
 
 export const Register = () => {
+  const navigate = useNavigate()
   return (
     <Container>
       <Wrapper>
@@ -69,7 +71,8 @@ export const Register = () => {
             und Aktionen, die auf der Plattform angeboten werden, per E-Mail
             informiert werden.
           </Agreement>
-          <Button>Registrieren</Button>
+
+          <Button onClick={() => navigate("/")}>Registrieren</Button>
         </Form>
       </Wrapper>
     </Container>
