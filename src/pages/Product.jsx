@@ -10,7 +10,7 @@ const Container = styled.div``;
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
-  ${mobile({ padding: "4px", flexDirection:"column" ,marginTop:"45px"})}
+  ${mobile({ padding: "4px", flexDirection: "column", marginTop: "45px" })}
 `;
 
 const ImgContainer = styled.div`

@@ -1,9 +1,7 @@
 import styled from "styled-components";
-import { mobile } from "../responsive";
+import { mobile, tablet } from "../responsive";
 import { useNavigate } from "react-router-dom";
-import {SmallNavi} from "../components/SmallNav"
-
-
+import { SmallNavi } from "../components/SmallNav";
 
 const Container = styled.div`
   width: 100vw;
@@ -16,20 +14,19 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column-reverse;
-
 `;
 
 const Wrapper = styled.div`
-
   width: 25%;
   padding: 20px;
   background-color: white;
-  margin-left : 20px;
+  margin-left: 20px;
+  border-radius:8px;
   ${mobile({ width: "75%" })}
+  ${tablet({ width: "60%" })}
 `;
 
 const Title = styled.h1`
-
   font-size: 24px;
   font-weight: 300;
 `;
@@ -64,20 +61,22 @@ const LinkLogin = styled.a`
 `;
 
 export const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <Container>
-      <SmallNavi/>
+      <SmallNavi />
       <Wrapper>
         <Title>Anmelden</Title>
         <Form>
           <Input placeholder="Deine E-Mail-Adresse" />
           <Input placeholder="Dein Passwort" />
-            <Button onClick={() =>navigate("/")}>Anmelden</Button>
-          <LinkLogin onClick={() =>navigate("/")}>
+          <Button onClick={() => navigate("/")}>Anmelden</Button>
+          <LinkLogin onClick={() => navigate("/")}>
             Passwort vergessen ?/ Probleme bei der Anmeldung ?
-          </LinkLogin >
-          <LinkLogin onClick={() =>navigate("/")}>Neu beu Shi ? Jetzt registrieren</LinkLogin>
+          </LinkLogin>
+          <LinkLogin onClick={() => navigate("/")}>
+            Neu beu Shi ? Jetzt registrieren
+          </LinkLogin>
         </Form>
       </Wrapper>
     </Container>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { mobile } from "../responsive";
+import { mobile, tablet } from "../responsive";
 import { useNavigate } from "react-router-dom";
-
+import { SmallNavi } from "../components/SmallNav";
 
 const Container = styled.div`
   width: 100vw;
@@ -13,13 +13,16 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column-reverse;
 `;
 
 const Wrapper = styled.div`
   width: 40%;
   padding: 20px;
   background-color: white;
+  border-radius:8px;
   ${mobile({ width: "75%" })}
+  ${tablet({ width: "70%" })}
 `;
 
 const Title = styled.h1`
@@ -53,9 +56,10 @@ const Button = styled.button`
 `;
 
 export const Register = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <Container>
+      <SmallNavi/>
       <Wrapper>
         <Title>Einfach registrieren</Title>
         <Form>

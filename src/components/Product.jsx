@@ -4,6 +4,7 @@ import {
   ShoppingCartOutlined,
 } from "@mui/icons-material";
 import styled from "styled-components";
+import { tablet } from "../responsive";
 
 const Info = styled.div`
   opacity: 0;
@@ -19,6 +20,7 @@ const Info = styled.div`
   justify-content: center;
   transition: all 0.5s ease;
   cursor: pointer;
+  ${tablet({ height: "50vh" })}
 `;
 
 const Container = styled.div`
@@ -35,6 +37,7 @@ const Container = styled.div`
     opacity: 1;
     border-radius:10px
   }
+  ${tablet({ height: "50vh" })}
 `;
 const Circle = styled.div`
   width: 200px;

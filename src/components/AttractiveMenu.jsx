@@ -5,13 +5,14 @@ import {
   LocalShippingOutlined,
 } from "@mui/icons-material";
 import styled from "styled-components";
-import { mobile } from "../responsive";
+import { mobile, tablet } from "../responsive";
 
 const Container = styled.div`
   margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   ${mobile({ marginTop: "60px" })}
+ 
 `;
 const Section = styled.div`
   display: flex;
@@ -26,10 +27,12 @@ const Section = styled.div`
   );
   position: relative;
   padding: 5px 5px 5px 5px;
+  margin-bottom: 5px;
   border-radius: 7px;
   align-items: center;
   justify-content: space-around;
   ${mobile({ display: "none"})}
+ 
 `;
 
 const SContainer = styled.div`
@@ -41,12 +44,14 @@ background: #fff;
 color: black;
 border-radius: 5px;
 font-size: 1rem;
+${tablet({ width: "140px" , padding: "4px 14px"})}
 
 }`;
 const Topic = styled.div`
   margin-left: 5px;
   font-size: 1.1rem;
   font-weight: 500;
+  ${tablet({ fontSize: "0.9rem"  })}
 `;
 
 export const AttractiveMenu = () => {

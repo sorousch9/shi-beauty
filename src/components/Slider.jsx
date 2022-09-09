@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
 import { useState } from "react";
 import { sliderItems } from "../Data";
-import { mobile } from "../responsive";
+import { mobile, tablet } from "../responsive";
 
 const Container = styled.div`
   width: 100%;
@@ -35,6 +35,7 @@ const Wrapper = styled.div`
   display: flex;
   transform: translatex(${(props) => props.slideIndex * -100}vw);
   transition: all 1.5s ease-in-out;
+  ${tablet({ height: "50vh"  })}
 `;
 
 const Sliders = styled.div`
@@ -43,16 +44,19 @@ const Sliders = styled.div`
   display: flex;
   background: ${(props) => props.backColor};
   align-items: start;
+ 
 `;
 
 const ImgContainer = styled.div`
   height: 100%;
   flex: 1;
   margin-left:30px
+ 
 `;
 
 const Image = styled.img`
   height: 80%;
+  ${tablet({ height: "50%" })}
 `;
 
 const InfoContainer = styled.div`
@@ -68,6 +72,7 @@ const Title = styled.h1`
   align-items: center;
   justify-content: center;
   text-align: center;
+  ${tablet({ fontSize: "40px" })}
 `;
 const Desc = styled.p`
   margin: 50px 0;
@@ -75,6 +80,7 @@ const Desc = styled.p`
   font-weight: 500;
   letter-spacing: 3px;
   text-align: center;
+  ${tablet({ fontSize: "16px" })}
  
 `;
 const Button = styled.button`
@@ -83,7 +89,7 @@ const Button = styled.button`
   background-color: transparent;
   cursor: pointer;
   border-radius: 4px;
- 
+  ${tablet({ fontSize: "16px", padding: "6px 30px" })}
 `;
 
 export const Slider = () => {

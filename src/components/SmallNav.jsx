@@ -11,13 +11,12 @@ import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   height: 70px;
-  
 `;
 const Wrapper = styled.div`
-margin-top: 10px;
-display: flex;
-flex-direction: row;
-${mobile({ flexWrap: "wrap", padding: "3px 3px" })};
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  ${mobile({ flexWrap: "wrap", padding: "3px 3px", justifyContent: "center" })};
 `;
 const Left = styled.div`
   flex: 15%;
@@ -25,12 +24,12 @@ const Left = styled.div`
   ${mobile({ flex: "0" })};
 `;
 const Logo = styled.h1`
-color:white;
+  color: #e8e8e8;
   cursor: pointer;
 `;
 const Right = styled.div`
   display: flex;
-  padding: 5px  10px;
+  padding: 5px 10px;
   ${mobile({ marginTop: "13px", justifyContent: "space-between" })};
 `;
 const MenuItem = styled.div`
@@ -38,7 +37,7 @@ const MenuItem = styled.div`
   align-items: center;
   font-size: 14px;
   cursor: pointer;
-  padding: 0px  5px;
+  padding: 0px 5px;
   ${mobile({ fontSize: "12px" })};
 `;
 
@@ -52,28 +51,45 @@ export const SmallNavi = () => {
         </Left>
         <Right>
           <MenuItem>
-            <Badge badgeContent={1} color="primary" style={{ color: "white" }}>
+            <Badge
+              badgeContent={1}
+              color="primary"
+              style={{ color: "#e8e8e8" }}
+            >
               <FavoriteBorderOutlined onClick={() => navigate("/")} />
             </Badge>
             <Link
               to="/redirect"
-              style={{ color: "white" , textDecoration: "none" }}
+              style={{ color: "#e8e8e8", textDecoration: "none" }}
             >
               Merkzettel
             </Link>
           </MenuItem>
 
           <MenuItem>
-            <Badge badgeContent={3} color="primary" style={{ color: "white" }}>
+            <Badge
+              badgeContent={3}
+              color="primary"
+              style={{ color: "#e8e8e8" }}
+            >
               <ShoppingCartOutlined onClick={() => navigate("/cart")} />
             </Badge>
-            <Link to="/cart" style={{ color: "white", textDecoration: "none" }}>
+            <Link
+              to="/cart"
+              style={{ color: "#e8e8e8", textDecoration: "none" }}
+            >
               Warenkorb
             </Link>
           </MenuItem>
           <MenuItem>
-            <PersonPinOutlined style={{ color: "white" }} onClick={() =>navigate("/login")} />
-            <Link to="/login" style={{ color: "white", textDecoration: "none" }}>
+            <PersonPinOutlined
+              style={{ color: "#e8e8e8" }}
+              onClick={() => navigate("/login")}
+            />
+            <Link
+              to="/login"
+              style={{ color: "#e8e8e8", textDecoration: "none" }}
+            >
               Mein Konto
             </Link>
           </MenuItem>
