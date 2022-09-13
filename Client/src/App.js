@@ -7,16 +7,29 @@ import { Product } from "./pages/Product";
 import { ProductList } from "./pages/ProductList";
 
 const App = () => {
+  const user = true;
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/products" element={<Product />} />
-        <Route path="/productlist" element={<ProductList />} />
+        <Route path="/product/:id" element={<Product />} />
+        <Route path="/products/:category" element={<ProductList />} />
         <Route path="/redirect" element={<Navigate to="/" />} />
+        <Route>
+          {user ? (
+            <Route path="/redirect" element={<Home />} />
+          ) : (
+            <Route path="/login" element={<Login />} />
+          )}
+        </Route>
+        <Route>
+          {user ? (
+            <Route path="/redirect" element={<Home />} />
+          ) : (
+            <Route path="/register" element={<Register />} />
+          )}
+        </Route>
       </Routes>
     </BrowserRouter>
   );

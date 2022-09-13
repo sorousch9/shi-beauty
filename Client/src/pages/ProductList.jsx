@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { Anons } from "../components/Anons";
 import { Footer } from "../components/Footer";
@@ -6,13 +8,12 @@ import { Newsletter } from "../components/Newsletter";
 import { Products } from "../components/Products";
 import { mobile } from "../responsive";
 
-const Container = styled.div`
-`
+const Container = styled.div``;
 
 const Title = styled.h1`
   margin: 20;
   text-align: center;
-  ${mobile({ marginTop: "50px"})}
+  ${mobile({ marginTop: "50px" })}
 `;
 
 const FilterContainer = styled.div`
@@ -21,7 +22,7 @@ const FilterContainer = styled.div`
   justify-content: space-around;
   background-color: #faaca8;
   background-image: linear-gradient(19deg, #faaca8 0%, #ddd6f3 100%);
-  ${mobile({ flexDirection: "column"})}
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const Filter = styled.div`
@@ -40,11 +41,23 @@ const Select = styled.select`
   width: 180px;
   height: 30px;
   margin-right: 20px;
-  ${mobile({ margin: "3px" ,width: "200px" })}
+  ${mobile({ margin: "3px", width: "200px" })}
 `;
 const Option = styled.option``;
 
 export const ProductList = () => {
+  const location = useLocation();
+  const cat = location.pathname.split("/")[2];
+
+  const [filters, setFilters] = useState({});
+  const [sort, setSort] = useState("Topseller");
+
+  const handleFilters = (e) => {
+    const value = e.target.value;
+
+    setFilters({ ...filters,[e.target.value]: value });
+  };
+  console.log(filters);
   return (
     <Container>
       <Anons />
@@ -53,10 +66,8 @@ export const ProductList = () => {
       <FilterContainer>
         <Filter>
           <FilterText>Filter Producten :</FilterText>
-          <Select>
-            <Option disabled selected>
-              Farbe
-            </Option>
+          <Select name="Color" onChange={handleFilters}>
+            <Option disabled>Farbe</Option>
             <Option>Blau</Option>
             <Option>Lila</Option>
             <Option>Grün</Option>
@@ -64,10 +75,8 @@ export const ProductList = () => {
             <Option>Rosa</Option>
             <Option>Rot</Option>
           </Select>
-          <Select>
-            <Option disabled selected>
-              Größe
-            </Option>
+          <Select name="size" onChange={handleFilters}>
+            <Option disabled>Größe</Option>
             <Option>34</Option>
             <Option>36</Option>
             <Option>38</Option>
@@ -75,10 +84,8 @@ export const ProductList = () => {
             <Option>42</Option>
             <Option>44</Option>
           </Select>
-          <Select>
-            <Option disabled selected>
-              Marke
-            </Option>
+          <Select name="brand" onChange={handleFilters}>
+            <Option disabled>Marke</Option>
             <Option>Tommy Hilfiger</Option>
             <Option>HalYS</Option>
             <Option>Rich & Royal</Option>
@@ -90,14 +97,14 @@ export const ProductList = () => {
 
         <Filter>
           <FilterText>Sortriren nach:</FilterText>
-          <Select>
-            <Option selected> Topseller</Option>
-            <Option>Neuheiten</Option>
-            <Option>Bewertungen</Option>
+          <Select onChange={e=>setSort(e.target.value)}>
+            <Option value="Topseller"> Topseller</Option>
+            <Option value="Neuheiten">Neuheiten</Option>
+            <Option Value="Bewertungen">Bewertungen</Option>
           </Select>
         </Filter>
       </FilterContainer>
-      <Products />
+      <Products cat={cat} filters={filters} sort={sort}/>
       <Newsletter />
       <Footer />
     </Container>
