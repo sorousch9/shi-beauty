@@ -1,31 +1,35 @@
 import { Add, Remove } from "@mui/icons-material";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { Anons } from "../components/Anons";
 import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
 import { Newsletter } from "../components/Newsletter";
 import { mobile } from "../responsive";
+import { publicRequest } from "../requestMethod";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
-  padding: 50px;
+  padding: 50px 5px;
   display: flex;
   ${mobile({ padding: "4px", flexDirection: "column", marginTop: "45px" })}
 `;
 
 const ImgContainer = styled.div`
-  flex: 1;
+  flex: 60wh;
 `;
 
 const Image = styled.img`
   width: 100%;
-  height: 90vh;
+  height: 100vh;
   object-fit: cover;
   ${mobile({ height: "40vh" })}
 `;
 
 const InfoContainer = styled.div`
-  flex: 1;
+  flex: 40%;
   padding: 0px 50px;
   ${mobile({ padding: "10px" })}
 `;
@@ -114,49 +118,69 @@ const Button = styled.button`
 `;
 
 export const Product = () => {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+
+  const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await publicRequest.get("/products/find/" + id);
+        setProduct(res.data);
+      } catch {}
+    };
+    getProduct();
+  }, [id]);
+const handleQuantityChange=(type) =>{
+  if (type === "decrese") {
+   quantity >1 && setQuantity(quantity-1);
+  }else {
+    setQuantity(quantity+1);
+  }
+}
+const handleClick = () => {
+  //cart
+  
+}
   return (
     <Container>
       <Anons />
       <Navbar />
       <Wrapper>
         <ImgContainer>
-          <Image src="https://i.otto.de/i/otto/86156309-62c7-5029-9766-87417a3ea309" />
+          <Image src={product.img} />
         </ImgContainer>
         <InfoContainer>
-          <Title>Vivance Hosenrock mit Blumendruck</Title>
-          <Desc>
-            Wie ein Blumenmeer: Der Hosenrock von Vivance zeigt sich mit einem
-            floralen Alloverprint und einem verspielten Volantbesatz. Der
-            bequeme Gummizugbund und die integrierten Shorts machen den Rock zu
-            einem bequemen Begleiter für jeden Tag. Zusätzlichen Komfort sichern
-            die leicht ausgestellte Passform und die weiche Jerseyqualität.
-            Style das Modell mit Blusenshirts oder Cropped-Tops, fühl dich wohl
-            und sieh gut aus – in dem Hosenrock von Vivance!.
-          </Desc>
-          <Price>€ 29,99</Price>
+          <Title>{product.title}</Title>
+          <Desc>{product.desc}</Desc>
+          <Price>€ {product.price}</Price>
           <FilterContainer>
-            <Filter>
+          <Filter>
               <FilterTitle>Farbe:</FilterTitle>
-              <FilterColor color="pink" />
-              <FilterColor color="Blue" />
-              <FilterColor color="purple" />
-              <FilterColor color="Red" />
+              {product.color?.map((c) => (
+                <FilterColor color={c} key={c} onClick={()=>setColor(c)} />
+              ))}
             </Filter>
             <FilterTitle> Größe: </FilterTitle>
-            <FilterSize>
-              <FilterSizeOption>34</FilterSizeOption>
-              <FilterSizeOption>36</FilterSizeOption>
-              <FilterSizeOption>38</FilterSizeOption>
-              <FilterSizeOption>40</FilterSizeOption>
+            <FilterSize onChange={(e)=>setSize(e.target.value)}>
+              {product.size?.map((s) => (
+                <FilterSizeOption key={s} >{s}</FilterSizeOption>
+              
+             ))}
+           
             </FilterSize>
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Remove />
-              <Amount>1</Amount>
-              <Add />
+              <Remove onClick={()=>handleQuantityChange("decrese")} />
+              <Amount>{quantity}</Amount>
+              <Add onClick={()=>handleQuantityChange("increse")} />
             </AmountContainer>
-            <Button>In den Warenkorb</Button>
+            <Button onClick={handleClick}>In den Warenkorb</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>

@@ -54,35 +54,43 @@ export const ProductList = () => {
 
   const handleFilters = (e) => {
     const value = e.target.value;
-
-    setFilters({ ...filters,[e.target.value]: value });
+    setFilters({
+      ...filters,
+      [e.target.name]: value,
+    });
   };
-  console.log(filters);
   return (
     <Container>
       <Anons />
       <Navbar />
-      <Title>Mode</Title>
+      <Title>{cat}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Producten :</FilterText>
-          <Select name="Color" onChange={handleFilters}>
+          <Select name="color" onChange={handleFilters}>
             <Option disabled>Farbe</Option>
-            <Option>Blau</Option>
-            <Option>Lila</Option>
-            <Option>Grün</Option>
-            <Option>Schwarz</Option>
-            <Option>Rosa</Option>
-            <Option>Rot</Option>
+            <Option value="green">Grün</Option>
+            <Option value="lime">Limette</Option>
+            <Option value="red">rot</Option>
+            <Option value="gray">Grau</Option>
+            <Option value="teal">blaugrün</Option>
+            <Option value="brown">braun</Option>
+            <Option value="orange">Orange</Option>
+            <Option value="yellow">yellow</Option>
+            <Option value="purple">Violett</Option>
           </Select>
           <Select name="size" onChange={handleFilters}>
             <Option disabled>Größe</Option>
+            <Option>30</Option>
+            <Option>32</Option>
             <Option>34</Option>
             <Option>36</Option>
             <Option>38</Option>
             <Option>40</Option>
             <Option>42</Option>
             <Option>44</Option>
+            <Option>46</Option>
+            <Option>48</Option>
           </Select>
           <Select name="brand" onChange={handleFilters}>
             <Option disabled>Marke</Option>
@@ -97,14 +105,14 @@ export const ProductList = () => {
 
         <Filter>
           <FilterText>Sortriren nach:</FilterText>
-          <Select onChange={e=>setSort(e.target.value)}>
-            <Option value="Topseller"> Topseller</Option>
-            <Option value="Neuheiten">Neuheiten</Option>
-            <Option Value="Bewertungen">Bewertungen</Option>
+          <Select onChange={(e) => setSort(e.target.value)}>
+            <Option value="neuheiten"> Neuheiten</Option>
+            <Option value="prise-n">Preis : niedrigster zu erst</Option>
+            <Option Value="prise-h">Preis : höchster zu erst</Option>
           </Select>
         </Filter>
       </FilterContainer>
-      <Products cat={cat} filters={filters} sort={sort}/>
+      <Products cat={cat} filters={filters} sort={sort} />
       <Newsletter />
       <Footer />
     </Container>
