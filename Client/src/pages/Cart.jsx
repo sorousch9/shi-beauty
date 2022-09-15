@@ -2,11 +2,16 @@ import styled from "styled-components";
 import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
 import { Anons } from "../components/Anons";
-import PImage1 from "../assets/P1.webp";
-import PImage2 from "../assets/P2.webp";
+import logo from "../assets/LOGO2.png";
 import Icons from "../assets/singleV3.png";
 import { Add, Remove } from "@mui/icons-material";
 import { mobile } from "../responsive";
+import { useSelector } from "react-redux";
+import StripeCheckout from "react-stripe-checkout";
+import { useEffect, useState } from "react";
+import { userRequest } from "../requestMethod";
+
+const KEY = process.env.React_App_STRIPE;
 
 const Container = styled.div``;
 
@@ -123,13 +128,6 @@ const PriceDetail = styled.span`
   flex-direction: column;
 `;
 
-const Summary = styled.div`
-  flex: 1;
-  border: 0.5px solid lightgray;
-  border-radius: 10px;
-  padding: 20px;
-  height: 50vh;
-`;
 
 const ProductAmountContainer = styled.div`
   display: flex;
@@ -159,17 +157,26 @@ const Gap = styled.hr`
   height: 1px;
   margin: 10px;
 `;
-
-const SummaryTitle = styled.h1`
-  font-weight: 200;
+const Summary = styled.div`
+  flex: 1;
+  border: 0.5px solid lightgray;
+  border-radius: 10px;
+  padding: 20px;
+  height: 50vh;
+ text-align: center;
 `;
 const SummaryItem = styled.div`
   margin: 30px 0px;
   display: flex;
+
   justify-content: space-between;
   font-weight: ${(props) => props.type === "total" && "500"};
   font-size: ${(props) => props.type === "total" && "24px"};
 `;
+const SummaryTitle = styled.h1`
+  font-weight: 200;
+`;
+
 const SummaryItemText = styled.span``;
 const SummaryItemPrice = styled.span``;
 const SummaryButton = styled.button`
@@ -225,6 +232,24 @@ const IconsContainer = styled.img`
 `;
 
 export const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+  const [stripeToken, setStripeToken] = useState(null);
+
+  const onToken = (token) => {
+    setStripeToken(token);
+  };
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        await userRequest("/checkout/payment", {
+          tokenId: stripeToken,
+          amount: cart.total * 100,
+        });
+      } catch {}
+    };
+    stripeToken && cart.total >= 1 && makeRequest();
+  }, [stripeToken, cart.total]);
+
   return (
     <Container>
       <Anons />
@@ -236,7 +261,7 @@ export const Cart = () => {
             <ButtenText type="filled">Weiter einkaufen</ButtenText>
           </TopButton>
           <TopTexts>
-            <TopText>Warenkorb (2)</TopText>
+            <TopText>Warenkorb ({cart.quantity})</TopText>
             <TopText>Merkzettel (0) </TopText>
           </TopTexts>
           <TopButton>
@@ -245,63 +270,45 @@ export const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            <Product>
-              <ProductDetail>
-                <Image src={PImage1} />
-                <Details>
-                  <ProductName>
-                    <b>Product :</b>Vivance Hosenrock mit Blumendruck
-                  </ProductName>
-                  <ProductId>
-                    <b>ID :</b>984651354546
-                  </ProductId>
-                  <ProductColor color="pink" />
-                  <ProductSize>
-                    <b>Size:</b> 38
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>29.99 €</ProductPrice>
-              </PriceDetail>
-            </Product>
+            {cart.products.map((product) => (
+              <Product>
+                <ProductDetail>
+                  <Image src={product.img} />
+                  <Details>
+                    <ProductName>
+                      <b>Product :</b>
+                      {product.title}
+                    </ProductName>
+                    <ProductId>
+                      <b>ID :</b>
+                      {product._id}
+                    </ProductId>
+                    <ProductColor color={product.color} />
+                    <ProductSize>
+                      <b>Size:</b> {product.size}
+                    </ProductSize>
+                  </Details>
+                </ProductDetail>
+                <PriceDetail>
+                  <ProductAmountContainer>
+                    <Add />
+                    <ProductAmount>{product.quantity}</ProductAmount>
+                    <Remove />
+                  </ProductAmountContainer>
+                  <ProductPrice>
+                    {product.price * product.quantity} €
+                  </ProductPrice>
+                </PriceDetail>
+              </Product>
+            ))}
             <Gap />
-            <Product>
-              <ProductDetail>
-                <Image src={PImage2} />
-                <Details>
-                  <ProductName>
-                    <b>Product :</b>LASCANA Wickelrock mit Alloverdruck
-                  </ProductName>
-                  <ProductId>
-                    <b>ID :</b>984651365987
-                  </ProductId>
-                  <ProductColor color="purple" />
-                  <ProductSize>
-                    <b>Size:</b> 38
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>1</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>49.99 €</ProductPrice>
-              </PriceDetail>
-            </Product>
           </Info>
           <Summary>
+          <SummaryTitle>Ihr Einkauf</SummaryTitle>
             <SummaryItem>
-              <SummaryTitle>Ihr Einkauf</SummaryTitle>
-              <SummaryItemText>Warenwert regulär</SummaryItemText>
-              <SummaryItemPrice> 109.97 €</SummaryItemPrice>
+              
+              <SummaryItemText>Warenwert</SummaryItemText>
+              <SummaryItemPrice> {cart.total} €</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Versandkosten</SummaryItemText>
@@ -313,10 +320,21 @@ export const Cart = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Gesamtsumme</SummaryItemText>
-              <SummaryItemPrice>109.97 €</SummaryItemPrice>
+              <SummaryItemPrice>{cart.total} €</SummaryItemPrice>
             </SummaryItem>
             <SummaryButton>
-              <SummaryButtonText>ZUR KASSE</SummaryButtonText>
+              <StripeCheckout
+                name="Shi Beauty"
+                image={logo}
+                billingAddress
+                shippingAddress
+                description={`alle Angaben in Euro, inkl. Steuer €${cart.total}`}
+                amount={cart.total * 100}
+                token={onToken}
+                stripeKey={KEY}
+              >
+                <SummaryButtonText>ZUR KASSE</SummaryButtonText>
+              </StripeCheckout>
             </SummaryButton>
             <UnderBottom>
               <IconsContainerTitle>WIR AKZEPTIEREN:</IconsContainerTitle>

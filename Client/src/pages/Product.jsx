@@ -9,6 +9,8 @@ import { Navbar } from "../components/Navbar";
 import { Newsletter } from "../components/Newsletter";
 import { mobile } from "../responsive";
 import { publicRequest } from "../requestMethod";
+import { addProduct } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -125,6 +127,7 @@ export const Product = () => {
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getProduct = async () => {
@@ -135,17 +138,16 @@ export const Product = () => {
     };
     getProduct();
   }, [id]);
-const handleQuantityChange=(type) =>{
-  if (type === "decrese") {
-   quantity >1 && setQuantity(quantity-1);
-  }else {
-    setQuantity(quantity+1);
-  }
-}
-const handleClick = () => {
-  //cart
-  
-}
+  const handleQuantityChange = (type) => {
+    if (type === "decrese") {
+      quantity > 1 && setQuantity(quantity - 1);
+    } else {
+      setQuantity(quantity + 1);
+    }
+  };
+  const handleClick = () => {
+    dispatch(addProduct({ ...product, quantity, color, size }));
+  };
   return (
     <Container>
       <Anons />
@@ -159,26 +161,24 @@ const handleClick = () => {
           <Desc>{product.desc}</Desc>
           <Price>€ {product.price}</Price>
           <FilterContainer>
-          <Filter>
+            <Filter>
               <FilterTitle>Farbe:</FilterTitle>
               {product.color?.map((c) => (
-                <FilterColor color={c} key={c} onClick={()=>setColor(c)} />
+                <FilterColor color={c} key={c} onClick={() => setColor(c)} />
               ))}
             </Filter>
             <FilterTitle> Größe: </FilterTitle>
-            <FilterSize onChange={(e)=>setSize(e.target.value)}>
+            <FilterSize onChange={(e) => setSize(e.target.value)}>
               {product.size?.map((s) => (
-                <FilterSizeOption key={s} >{s}</FilterSizeOption>
-              
-             ))}
-           
+                <FilterSizeOption key={s}>{s}</FilterSizeOption>
+              ))}
             </FilterSize>
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Remove onClick={()=>handleQuantityChange("decrese")} />
+              <Remove onClick={() => handleQuantityChange("decrese")} />
               <Amount>{quantity}</Amount>
-              <Add onClick={()=>handleQuantityChange("increse")} />
+              <Add onClick={() => handleQuantityChange("increse")} />
             </AmountContainer>
             <Button onClick={handleClick}>In den Warenkorb</Button>
           </AddContainer>

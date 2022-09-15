@@ -12,6 +12,7 @@ import Logo1 from "../assets/LOGO.png";
 import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   height: 70px;
@@ -74,6 +75,9 @@ const MenuItem = styled.div`
 `;
 
 export const Navbar = () => {
+  const quantity = useSelector(state=>state.cart.quantity)
+
+
   const navigate = useNavigate();
   return (
     <Container>
@@ -114,7 +118,7 @@ export const Navbar = () => {
           </MenuItem>
 
           <MenuItem>
-            <Badge badgeContent={3} color="primary" style={{ color: "gray" }}>
+            <Badge badgeContent={quantity} color="primary" style={{ color: "gray" }}>
               <ShoppingCartOutlined onClick={() => navigate("/cart")} />
             </Badge>
             <Link to="/cart" style={{ color: "gray", textDecoration: "none" }}>

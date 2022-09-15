@@ -1,6 +1,6 @@
 import {
   FavoriteBorderOutlined,
-  SearchOutlined,
+  OpenInFull,
   ShoppingCartOutlined,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
@@ -80,7 +80,7 @@ export const Product = ({ item }) => {
           <ShoppingCartOutlined />
         </Icon>
         <Icon>
-          <Link to={`/product/${item._id}`}> <SearchOutlined /></Link>
+          <Link to={`/product/${item._id}`}> <OpenInFull /></Link>
          
         </Icon>
         <Icon>
