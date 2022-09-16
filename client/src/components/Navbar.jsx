@@ -132,7 +132,7 @@ export const Navbar = () => {
               onClick={() => navigate("/login")}
             />
             <Link to="/login" style={{ color: "gray", textDecoration: "none" }}>
-              Mein Konto
+              Anmelden
             </Link>
           </MenuItem>
           <MenuItem>

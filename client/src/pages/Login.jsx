@@ -2,6 +2,9 @@ import styled from "styled-components";
 import { mobile, tablet } from "../responsive";
 import { useNavigate } from "react-router-dom";
 import { SmallNavi } from "../components/SmallNav";
+import { useState } from "react";
+import { login } from "../redux/apiCalls";
+import { useDispatch, useSelector } from "react-redux";
 
 const Container = styled.div`
   width: 100vw;
@@ -21,7 +24,7 @@ const Wrapper = styled.div`
   padding: 20px;
   background-color: white;
   margin-left: 20px;
-  border-radius:8px;
+  border-radius: 8px;
   ${mobile({ width: "75%" })}
   ${tablet({ width: "60%" })}
 `;
@@ -51,6 +54,10 @@ const Button = styled.button`
   color: white;
   cursor: pointer;
   margin-bottom: 10px;
+  &:disabled{
+    color: gray;
+    cursor:not-allowed;
+  }
 `;
 
 const LinkLogin = styled.a`
@@ -60,21 +67,42 @@ const LinkLogin = styled.a`
   cursor: pointer;
 `;
 
+const Error = styled.span`
+color:red;
+`
+//username and password (userName *)
 export const Login = () => {
   const navigate = useNavigate();
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const {isFetching, error}=useSelector((state)=> state.user)
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    login(dispatch, { username, password });
+  };
+
   return (
     <Container>
       <SmallNavi />
       <Wrapper>
         <Title>Anmelden</Title>
         <Form>
-          <Input placeholder="Deine E-Mail-Adresse" />
-          <Input placeholder="Dein Passwort" />
-          <Button onClick={() => navigate("/")}>Anmelden</Button>
-          <LinkLogin onClick={() => navigate("/")}>
+          <Input
+            placeholder="Deine E-Mail-Adresse"
+            onChange={(e) => setUserName(e.target.value)}
+          />
+          <Input
+            placeholder="Dein Passwort"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button onClick={handleClick} disabled={isFetching}>Anmelden</Button>
+          {error && <Error>Email oder password stimmt nicht...</Error>}
+          <LinkLogin onClick={() => navigate("/register")}>
             Passwort vergessen ?/ Probleme bei der Anmeldung ?
           </LinkLogin>
-          <LinkLogin onClick={() => navigate("/")}>
+          <LinkLogin onClick={() => navigate("/register")}>
             Neu beu Shi ? Jetzt registrieren
           </LinkLogin>
         </Form>
