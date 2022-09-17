@@ -9,7 +9,7 @@ import { ProductList } from "./pages/ProductList";
 import { useSelector } from "react-redux";
 
 const App = () => {
-  const user = useSelector(state=>state.user.currentUser);
+  const user = useSelector((state) => state.user.currentUser);
   return (
     <BrowserRouter>
       <Routes>
@@ -18,17 +18,16 @@ const App = () => {
         <Route path="/success" element={<Success />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/products/:category" element={<ProductList />} />
-        <Route path="/redirect" element={<Navigate to="/" />} />
         <Route>
           {user ? (
-            <Route path="/redirect" element={<Home />} />
+            <Route path="/login" element={<Navigate to="/" />} />
           ) : (
             <Route path="/login" element={<Login />} />
           )}
         </Route>
         <Route>
           {user ? (
-            <Route path="/redirect" element={<Home />} />
+            <Route path="/register" element={<Navigate to="/" />} />
           ) : (
             <Route path="/register" element={<Register />} />
           )}

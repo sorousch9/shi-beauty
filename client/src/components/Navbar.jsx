@@ -110,7 +110,7 @@ export const Navbar = () => {
               <FavoriteBorderOutlined onClick={() => navigate("/")} />
             </Badge>
             <Link
-              to="/redirect"
+             to="/" 
               style={{ color: "gray", textDecoration: "none" }}
             >
               Merkzettel

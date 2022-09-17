@@ -2,19 +2,10 @@ import styled from "styled-components";
 import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
 import { Anons } from "../components/Anons";
-import logo from "../assets/LOGO2.png";
 import Icons from "../assets/singleV3.png";
 import { Add, Remove } from "@mui/icons-material";
-import { mobile } from "../responsive";
-import { useSelector } from "react-redux";
-import StripeCheckout from "react-stripe-checkout";
-import { useEffect, useState } from "react";
-import { userRequest } from "../requestMethod";
-import { useNavigate } from "react-router";
-
-
-
-const KEY = process.env.React_App_STRIPE;
+import { mobile, minitablet } from "../responsive";
+import { useDispatch, useSelector } from "react-redux";
 
 const Container = styled.div``;
 
@@ -76,6 +67,7 @@ const ButtenText = styled.span`
   font-weight: 500;
   background: ${(props) => (props.type === "filled" ? "#ebebeb" : "#white")};
   border-radius: 15px;
+  ${minitablet({ padding: "5px 20px" })};
 `;
 
 const TopTexts = styled.div`
@@ -89,7 +81,8 @@ const TopText = styled.span`
 const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
-  ${mobile({ flexDirection: "column" })}
+  ${mobile({ flexDirection: "column" })};
+  ${minitablet({ flexDirection: "column" })};
 `;
 
 const Info = styled.div`
@@ -131,7 +124,6 @@ const PriceDetail = styled.span`
   flex-direction: column;
 `;
 
-
 const ProductAmountContainer = styled.div`
   display: flex;
   align-items: center;
@@ -166,7 +158,7 @@ const Summary = styled.div`
   border-radius: 10px;
   padding: 20px;
   height: 50vh;
- text-align: center;
+  text-align: center;
 `;
 const SummaryItem = styled.div`
   margin: 30px 0px;
@@ -234,26 +226,10 @@ const IconsContainer = styled.img`
   margin-bottom: 10px;
 `;
 
-export const Cart = () => {
+export const Cart = ({id, img, title, price, quantity=0}) => {
   const cart = useSelector((state) => state.cart);
-  const [stripeToken, setStripeToken] = useState(null);
-  const history = useNavigate()
-
-  const onToken = (token) => {
-    setStripeToken(token);
-  };
-  useEffect(() => {
-    const makeRequest = async () => {
-      try {
-      const res=  await userRequest.post("/checkout/payment", {
-          tokenId: stripeToken.id,
-          amount: cart.total * 100,
-        });
-        history.push("/success",{data:res.data})
-      } catch {}
-    }; makeRequest()
-    stripeToken && cart.total >= 1 && makeRequest();
-  }, [stripeToken, cart.total ,history]);
+  const dispatch = useDispatch()
+  console.log(cart);
 
   return (
     <Container>
@@ -276,7 +252,7 @@ export const Cart = () => {
         <Bottom>
           <Info>
             {cart.products.map((product) => (
-              <Product>
+              <Product key={product._id}>
                 <ProductDetail>
                   <Image src={product.img} />
                   <Details>
@@ -309,9 +285,8 @@ export const Cart = () => {
             <Gap />
           </Info>
           <Summary>
-          <SummaryTitle>Ihr Einkauf</SummaryTitle>
+            <SummaryTitle>Ihr Einkauf</SummaryTitle>
             <SummaryItem>
-              
               <SummaryItemText>Warenwert</SummaryItemText>
               <SummaryItemPrice> {cart.total} €</SummaryItemPrice>
             </SummaryItem>
@@ -328,18 +303,7 @@ export const Cart = () => {
               <SummaryItemPrice>{cart.total} €</SummaryItemPrice>
             </SummaryItem>
             <SummaryButton>
-              <StripeCheckout
-                name="Shi Beauty"
-                image={logo}
-                billingAddress
-                shippingAddress
-                description={`alle Angaben in Euro, inkl. Steuer €${cart.total}`}
-                amount={cart.total * 100}
-                token={onToken}
-                stripeKey={KEY}
-              >
-                <SummaryButtonText>ZUR KASSE</SummaryButtonText>
-              </StripeCheckout>
+              <SummaryButtonText>ZUR KASSE</SummaryButtonText>
             </SummaryButton>
             <UnderBottom>
               <IconsContainerTitle>WIR AKZEPTIEREN:</IconsContainerTitle>

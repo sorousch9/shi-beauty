@@ -36,14 +36,14 @@ const Container = styled.div`
 
   &:hover ${Info} {
     opacity: 1;
-    border-radius:10px
+    border-radius: 10px;
   }
   ${tablet({ height: "50vh" })}
 `;
 const Circle = styled.div`
   width: 200px;
   height: 200px;
-  border-radius:30%;
+  border-radius: 30%;
   background-color: antiquewhite;
   position: absolute;
 `;
@@ -69,19 +69,21 @@ const Icon = styled.div`
   }
 `;
 export const Product = ({ item }) => {
-
-  
   return (
     <Container>
       <Circle />
       <Image src={item.img} />
       <Info>
         <Icon>
-          <ShoppingCartOutlined />
+          <Link to={`/product/${item._id}`}>
+            <ShoppingCartOutlined />
+          </Link>
         </Icon>
         <Icon>
-          <Link to={`/product/${item._id}`}> <OpenInFull /></Link>
-         
+          <Link to={`/product/${item._id}`}>
+            {" "}
+            <OpenInFull />
+          </Link>
         </Icon>
         <Icon>
           <FavoriteBorderOutlined />
