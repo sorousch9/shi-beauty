@@ -37,13 +37,13 @@ const FilterText = styled.span`
   margin-right: 20px;
   ${mobile({ marginRight: "0px" })}
 `;
-const Select = styled.select`
+const Select = styled.ul`
   width: 180px;
   height: 30px;
   margin-right: 20px;
   ${mobile({ margin: "3px", width: "200px" })}
 `;
-const Option = styled.option``;
+const Option = styled.li``;
 
 export const ProductList = () => {
   const location = useLocation();
@@ -68,7 +68,7 @@ export const ProductList = () => {
         <Filter>
           <FilterText>Filter Producten :</FilterText>
           <Select name="color" onChange={handleFilters}>
-            <Option disabled>Farbe</Option>
+            <Option disabled >Farbe</Option>
             <Option value="green">Grün</Option>
             <Option value="lime">Limette</Option>
             <Option value="red">rot</Option>

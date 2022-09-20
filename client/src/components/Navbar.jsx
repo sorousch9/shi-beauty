@@ -45,7 +45,6 @@ const Input = styled.input`
   background-color: #f0f0f0;
   min-width: 35vw;
 `;
-
 const Left = styled.div`
   flex: 15%;
   text-align: center;
@@ -55,7 +54,6 @@ const Logo = styled.img`
   width: 100px;
   cursor: pointer;
 `;
-
 const Right = styled.div`
   display: flex;
   flex: 40%;
@@ -73,11 +71,8 @@ const MenuItem = styled.div`
   color: gray;
   ${mobile({ fontSize: "12px" })};
 `;
-
 export const Navbar = () => {
-  const quantity = useSelector(state=>state.cart.quantity)
-
-
+  const quantity = useSelector((state) => state.cart.totalCount);
   const navigate = useNavigate();
   return (
     <Container>
@@ -109,16 +104,17 @@ export const Navbar = () => {
             <Badge badgeContent={1} color="primary" style={{ color: "gray" }}>
               <FavoriteBorderOutlined onClick={() => navigate("/")} />
             </Badge>
-            <Link
-             to="/" 
-              style={{ color: "gray", textDecoration: "none" }}
-            >
+            <Link to="/" style={{ color: "gray", textDecoration: "none" }}>
               Merkzettel
             </Link>
           </MenuItem>
 
           <MenuItem>
-            <Badge badgeContent={quantity} color="primary" style={{ color: "gray" }}>
+            <Badge
+              badgeContent={quantity}
+              color="primary"
+              style={{ color: "gray" }}
+            >
               <ShoppingCartOutlined onClick={() => navigate("/cart")} />
             </Badge>
             <Link to="/cart" style={{ color: "gray", textDecoration: "none" }}>

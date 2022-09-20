@@ -3,10 +3,20 @@ import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
 import { Anons } from "../components/Anons";
 import Icons from "../assets/singleV3.png";
-import { Add, Remove } from "@mui/icons-material";
+import { Add, DeleteOutlined, Remove } from "@mui/icons-material";
 import { mobile, minitablet } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
-
+import {
+  calculateTax,
+  getTotalAmount,
+  incrementQuantity,
+  decrementQuantity,
+  removeProduct,
+  getCartProducts,
+  getCartCount,
+  getSubTotal,
+} from "../redux/cartRedux";
+import { useEffect } from "react";
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -91,6 +101,8 @@ const Info = styled.div`
 const Product = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+
   ${mobile({ flexDirection: "column" })}
 `;
 const ProductDetail = styled.div`
@@ -122,6 +134,7 @@ const PriceDetail = styled.span`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-top: 20px;
 `;
 
 const ProductAmountContainer = styled.div`
@@ -131,10 +144,25 @@ const ProductAmountContainer = styled.div`
   border:1px solid #ececec;
   border-radius 5px;
   background-color: #ececec;
-  padding: 0px 10px;
+  padding: 2px 10px;
   cursor: pointer;
+
   ${mobile({ margin: "10px" })}
 `;
+const RemoveIco = styled.button` 
+display: flex;
+height: 40px;
+margin-right: 20px;
+align-items: center;
+margin-bottom: 20px;
+border:1px solid #ececec;
+border-radius 5px;
+background-color: #ececec;
+padding: 0px 10px;
+margin-left: 10px;
+cursor: pointer;
+margin-top: 20px;`;
+
 const ProductAmount = styled.div`
   font-size: 20px;
   margin: 5px;
@@ -226,11 +254,20 @@ const IconsContainer = styled.img`
   margin-bottom: 10px;
 `;
 
-export const Cart = ({id, img, title, price, quantity=0}) => {
-  const cart = useSelector((state) => state.cart);
-  const dispatch = useDispatch()
-  console.log(cart);
+export const Cart = () => {
+  const dispatch = useDispatch();
+  const { products, subAmount, tax, totalAmount } = useSelector(
+    (state) => state.cart
+  );
 
+  useEffect(() => {
+    dispatch(getCartProducts());
+    dispatch(getSubTotal());
+    dispatch(getCartCount());
+    dispatch(calculateTax());
+    dispatch(getTotalAmount());
+  }, [dispatch]);
+  const quantity = useSelector(state=>state.cart.totalCount)
   return (
     <Container>
       <Anons />
@@ -242,7 +279,7 @@ export const Cart = ({id, img, title, price, quantity=0}) => {
             <ButtenText type="filled">Weiter einkaufen</ButtenText>
           </TopButton>
           <TopTexts>
-            <TopText>Warenkorb ({cart.quantity})</TopText>
+            <TopText>Warenkorb ({quantity})</TopText>
             <TopText>Merkzettel (0) </TopText>
           </TopTexts>
           <TopButton>
@@ -251,7 +288,7 @@ export const Cart = ({id, img, title, price, quantity=0}) => {
         </Top>
         <Bottom>
           <Info>
-            {cart.products.map((product) => (
+            {products.map((product) => (
               <Product key={product._id}>
                 <ProductDetail>
                   <Image src={product.img} />
@@ -270,37 +307,72 @@ export const Cart = ({id, img, title, price, quantity=0}) => {
                     </ProductSize>
                   </Details>
                 </ProductDetail>
+
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Add />
+                    <Add
+                      onClick={() => {
+                        dispatch(incrementQuantity(product._id));
+                        dispatch(getSubTotal());
+                        dispatch(getCartCount());
+                        dispatch(calculateTax());
+                        dispatch(getTotalAmount());
+                      }}
+                    />
                     <ProductAmount>{product.quantity}</ProductAmount>
-                    <Remove />
+                    <Remove
+                      onClick={() => {
+                        dispatch(decrementQuantity(product._id));
+                        dispatch(getSubTotal());
+                        dispatch(getCartCount());
+                        dispatch(calculateTax());
+                        dispatch(getTotalAmount());
+                      }}
+                    />
                   </ProductAmountContainer>
                   <ProductPrice>
-                    {product.price * product.quantity} €
+                    {parseFloat(product.price * product.quantity).toFixed(2)} €
                   </ProductPrice>
                 </PriceDetail>
+                <RemoveIco
+                  onClick={() => {
+                    dispatch(removeProduct(product._id));
+                    dispatch(getSubTotal());
+                    dispatch(getCartCount());
+                    dispatch(calculateTax());
+                    dispatch(getTotalAmount());
+                  }}
+                >
+                  <DeleteOutlined />
+                </RemoveIco>
               </Product>
             ))}
             <Gap />
           </Info>
           <Summary>
-            <SummaryTitle>Ihr Einkauf</SummaryTitle>
+            <SummaryTitle>Zusammenfassung</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Warenwert</SummaryItemText>
-              <SummaryItemPrice> {cart.total} €</SummaryItemPrice>
+              <SummaryItemPrice>
+                {" "}
+                {parseFloat(subAmount).toFixed(2)} €
+              </SummaryItemPrice>
+            </SummaryItem>
+            <SummaryItem>
+              <SummaryItemText>zzgl. 19 % MwSt.</SummaryItemText>
+              <SummaryItemPrice>
+                {parseFloat(tax).toFixed(2)} €
+              </SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Versandkosten</SummaryItemText>
-              <SummaryItemPrice>3.99 €</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Versandkosten Rabatt</SummaryItemText>
-              <SummaryItemPrice>-3.99 €</SummaryItemPrice>
+              <SummaryItemPrice>2,99 €</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Gesamtsumme</SummaryItemText>
-              <SummaryItemPrice>{cart.total} €</SummaryItemPrice>
+              <SummaryItemPrice>
+                {parseFloat(totalAmount).toFixed(2)} €
+              </SummaryItemPrice>
             </SummaryItem>
             <SummaryButton>
               <SummaryButtonText>ZUR KASSE</SummaryButtonText>

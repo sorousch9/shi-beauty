@@ -1,4 +1,3 @@
-import { Add, Remove } from "@mui/icons-material";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -9,8 +8,14 @@ import { Navbar } from "../components/Navbar";
 import { Newsletter } from "../components/Newsletter";
 import { mobile } from "../responsive";
 import { publicRequest } from "../requestMethod";
-import { addProduct } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
+import {
+  addProduct,
+  getCartCount,
+  getSubTotal,
+  calculateTax,
+  getTotalAmount,
+} from "../redux/cartRedux";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -55,11 +60,14 @@ const FilterContainer = styled.div`
   width: 50%;
   margin-top: 30px;
   align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   ${mobile({ width: "100%" })}
 `;
 const Filter = styled.div`
   align-items: center;
   display: flex;
+  justify-content: center;
 `;
 const FilterTitle = styled.span`
   font-size: 20px;
@@ -67,18 +75,26 @@ const FilterTitle = styled.span`
 `;
 
 const FilterColor = styled.div`
-  margin: 0px 3px;
+  margin: 0px 5px;
   width: 30px;
   height: 20px;
   border-radius: 4px;
   background-color: ${(props) => props.color};
   cursor: pointer;
 `;
-const FilterSize = styled.select`
-  margin-left: 5px;
-  padding: 5px;
+const FilterSize = styled.div`
+  margin-top: 5px;
+  display: flex;
 `;
-const FilterSizeOption = styled.option``;
+const FilterSizeOption = styled.li`
+  list-style-type: none;
+  cursor: pointer;
+  margin-right: 10px;
+  border:1px solid #ececec;
+  border-radius 5px;
+  background-color: #ececec;
+  padding: 8px 20px;
+`;
 
 const AddContainer = styled.div`
   display: flex;
@@ -87,24 +103,6 @@ const AddContainer = styled.div`
   justify-content: space-between;
   margin-top: 30px;
   ${mobile({ width: "100%" })}
-`;
-
-const AmountContainer = styled.div`
-  display: flex;
-  align-items: center;
-  font-weight: 700;
-  font-size: 18px;
-`;
-
-const Amount = styled.span`
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  border: 1px solid teal;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0px 5px;
 `;
 
 const Button = styled.button`
@@ -118,17 +116,22 @@ const Button = styled.button`
     background-color: #f8f4f4;
   }
 `;
-
 export const Product = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-
   const [product, setProduct] = useState({});
-  const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
   const dispatch = useDispatch();
 
+  const addToCart = (product) => {
+    dispatch(addProduct({ ...product, color, size }));
+    dispatch(getCartCount());
+    dispatch(getSubTotal());
+    dispatch(calculateTax());
+    dispatch(getTotalAmount());
+  };
+  useEffect(() => {}, [dispatch]);
   useEffect(() => {
     const getProduct = async () => {
       try {
@@ -138,21 +141,11 @@ export const Product = () => {
     };
     getProduct();
   }, [id]);
-  const handleQuantityChange = (type) => {
-    if (type === "decrese") {
-      quantity > 1 && setQuantity(quantity - 1);
-    } else {
-      setQuantity(quantity + 1);
-    }
-  };
-  const handleClick = () => {
-    dispatch(addProduct({ ...product, quantity, color, size }));
-  };
   return (
     <Container>
       <Anons />
       <Navbar />
-      <Wrapper>
+      <Wrapper key={product.id}>
         <ImgContainer>
           <Image src={product.img} />
         </ImgContainer>
@@ -167,20 +160,24 @@ export const Product = () => {
                 <FilterColor color={c} key={c} onClick={() => setColor(c)} />
               ))}
             </Filter>
-            <FilterTitle> Größe: </FilterTitle>
-            <FilterSize onChange={(e) => setSize(e.target.value)}>
+            <FilterTitle> Größe (Normalgrößen) </FilterTitle>
+            <FilterSize>
               {product.size?.map((s) => (
-                <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                <FilterSizeOption key={s} onClick={() => setSize(s)}>
+                  {s}
+                </FilterSizeOption>
               ))}
             </FilterSize>
           </FilterContainer>
+
           <AddContainer>
-            <AmountContainer>
-              <Remove onClick={() => handleQuantityChange("decrese")} />
-              <Amount>{quantity}</Amount>
-              <Add onClick={() => handleQuantityChange("increse")} />
-            </AmountContainer>
-            <Button onClick={handleClick}>In den Warenkorb</Button>
+            <Button
+              onClick={() => {
+                addToCart(product);
+              }}
+            >
+              In den Warenkorb
+            </Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>

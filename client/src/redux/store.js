@@ -14,10 +14,9 @@ import {
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
-  key: "root",
-  version: 1,
+  key: 'root',
   storage,
-};
+}
 
 const rootReducer = combineReducers({ user: userReducer, cart: cartReducer });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
