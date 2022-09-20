@@ -4,10 +4,10 @@ React Styled Components
 
 
 
-![full Home Page](/client/src/assets/Screenshots/shibeauty%20(1).png?raw=true"full Home Page")
-![Cart Page](/client/src/assets/Screenshots/shibeauty%20(2).png?raw=true"Cart Page")
-![sign in Page](/client/src/assets/Screenshots/shibeauty%20(3).png?raw=true"sign in Page")
-![Register Page](/client/src/assets/Screenshots/shibeauty%20(4).png?raw=true"Register Page")
+![full Home Page](/client/src/assets/Screenshots/shibeauty%20(1).png?raw=true "full Home Page")
+![Cart Page](/client/src/assets/Screenshots/shibeauty%20(2).png?raw=true "Cart Page")
+![sign in Page](/client/src/assets/Screenshots/shibeauty%20(3).png?raw=true "sign in Page")
+![Register Page](/client/src/assets/Screenshots/shibeauty%20(4).png?raw=true "Register Page")
 
 
 
